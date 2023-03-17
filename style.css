@@ -1,10 +1,14 @@
 :root {
+    --popup-duration: .4s;
+    --stagger: .1s;
+    
     /* Accurate brand colours! Wow! */
     --lottomax-colour: #84bd00;
     --lotto649-colour: #034ea2;
     --dailygrand-colour: #fa9d1a;
     --scratch-colour: #787878;
 }
+
 body {
     margin: 0;
     font-family: "Arial", "Helvetica", sans-serif;
@@ -62,8 +66,8 @@ main {
     background-color: var(--scratch-colour);
 }
 
-.tile {
-    font-size: 64pt;
+.jackpot-container {
+    display: flex;
 }
 
 .jackpot {
@@ -101,12 +105,34 @@ main {
     width: 560px;
     height: 220px;
     
+    font-size: 64pt;
+    
     color: white;
     background: lightblue;
-    
     border-radius: 8px;
+    
+    animation: var(--popup-duration) appear backwards;
 }
 
-.jackpot-container {
-    display: flex;
+/*
+Unfortunately, no elegant solution exists for staggered animations in vanilla
+CSS. Since the requirements for this project won't change in the future,
+hardcoding in the delay like this seemed acceptable.
+*/
+.tile:nth-child(2) {
+    animation-delay: var(--stagger);
+}
+
+.tile:nth-child(3) {
+    animation-delay: calc(var(--stagger)*1.5);
+}
+
+.tile:nth-child(4) {
+    animation-delay: calc(var(--stagger)*2);
+}
+
+@keyframes appear {
+    0% {transform: scale(0);}
+    75% {transform: scale(1.15);}
+    100% {transform: scale(1);}
 }
