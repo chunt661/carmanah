@@ -1,3 +1,10 @@
+:root {
+    /* Accurate brand colours! Wow! */
+    --lottomax-colour: #84bd00;
+    --lotto649-colour: #034ea2;
+    --dailygrand-colour: #fa9d1a;
+    --scratch-colour: #787878;
+}
 body {
     margin: 0;
     font-family: "Arial", "Helvetica", sans-serif;
@@ -31,6 +38,30 @@ main {
     font-size: 96pt;
 }
 
+.overlay.lotto-lmax {
+    color: var(--lottomax-colour);
+}
+
+.overlay.lotto-l649 {
+    color: var(--lotto649-colour);
+}
+
+.tile.lotto-lmax {
+    background-color: var(--lottomax-colour);
+}
+
+.tile.lotto-l649 {
+    background-color: var(--lotto649-colour);
+}
+
+.tile.lotto-dg {
+    background-color: var(--dailygrand-colour);
+}
+
+.tile.lotto-scratch {
+    background-color: var(--scratch-colour);
+}
+
 .tile {
     font-size: 64pt;
 }
@@ -43,6 +74,7 @@ main {
 .dollar {
     font-size: .375em;
     line-height: 1.67em;
+    color: inherit;
 }
 
 .illion {
