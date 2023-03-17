@@ -1,0 +1,80 @@
+body {
+    margin: 0;
+    font-family: "Arial", "Helvetica", sans-serif;
+    
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+}
+
+main {
+    display: flex;
+    justify-content: space-between;
+}
+
+.side-video {
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    font-size: 96pt;
+}
+
+.tile {
+    font-size: 64pt;
+}
+
+.jackpot {
+    line-height: 1em;
+    font-weight: 600;
+}
+
+.dollar {
+    font-size: .375em;
+    line-height: 1.67em;
+}
+
+.illion {
+    font-size: .5em;
+    font-weight: 600;
+}
+
+.feed {
+    --padding: 40px;
+    
+    display: flex;
+    flex-direction: column;
+    
+    grid-gap: var(--padding);
+    padding: var(--padding) 0;
+}
+
+.tile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    width: 560px;
+    height: 220px;
+    
+    color: white;
+    background: lightblue;
+    
+    border-radius: 8px;
+}
+
+.jackpot-container {
+    display: flex;
+}
