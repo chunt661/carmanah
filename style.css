@@ -6,7 +6,7 @@
     --lottomax-colour: #84bd00;
     --lotto649-colour: #034ea2;
     --dailygrand-colour: #fa9d1a;
-    --scratch-colour: #787878;
+    --scratch-colour: #de1f26;
 }
 
 body {
@@ -109,7 +109,7 @@ main {
     
     color: white;
     background: lightblue;
-    border-radius: 8px;
+    border-radius: 32px;
     
     animation: var(--popup-duration) appear backwards;
 }
