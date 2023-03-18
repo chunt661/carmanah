@@ -23,6 +23,8 @@ main {
     justify-content: space-between;
 }
 
+.hidden { display: none !important; }
+
 .side-video {
     position: relative;
 }
@@ -50,6 +52,14 @@ main {
     color: var(--lotto649-colour);
 }
 
+.overlay.lotto-lmax .error-container span {
+    background-color: var(--lottomax-colour);
+}
+
+.overlay.lotto-l649 .error-container span {
+    background-color: var(--lotto649-colour);
+}
+
 .tile.lotto-lmax {
     background-color: var(--lottomax-colour);
 }
@@ -66,7 +76,11 @@ main {
     background-color: var(--scratch-colour);
 }
 
-.jackpot-container {
+.tile .error-container span {
+    background-color: white;
+}
+
+.jackpot-container > div {
     display: flex;
 }
 
@@ -131,8 +145,38 @@ hardcoding in the delay like this seemed acceptable.
     animation-delay: calc(var(--stagger)*2);
 }
 
+.error-container {
+    display: flex;
+    justify-content: center;
+    grid-gap: .15em;
+}
+
+.error-container span {
+    display: inline-block;
+    border-radius: 50%;
+    width: .3em;
+    height: .3em;
+    
+    animation: 1s strobe backwards infinite ease;
+}
+
+.error-container span:nth-child(2) {
+    animation-delay: .3s;
+}
+
+.error-container span:nth-child(3) {
+    animation-delay: .6s;
+}
+
 @keyframes appear {
     0% {transform: scale(0);}
     75% {transform: scale(1.15);}
     100% {transform: scale(1);}
+}
+
+@keyframes strobe {
+    0% {opacity: 15%;}
+    33% {opacity: 85%;}
+    66% {opacity: 15%;}
+    100% {opacity: 15%;}
 }

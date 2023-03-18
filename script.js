@@ -49,8 +49,22 @@ Creates and returns a DOM element to be used for displaying jackpots.
 function createJackpotMarkup() {
     const container = document.createElement("div");
     
+    // errorContainer holds the error ellipsis
+    const errorContainer = document.createElement("div");
+    errorContainer.classList.add("error-container");
+    
+    for (let i = 0; i < 3; i++) {
+        let span = document.createElement("span");
+        errorContainer.appendChild(span);
+    }
+    
+    // jackpotContainer holds all tags related to the jackpot display
+    // (the jackpot is hidden by default)
     const jackpotContainer = document.createElement("div");
-    jackpotContainer.classList.add("jackpot-container");
+    jackpotContainer.classList.add("jackpot-container", "hidden");
+    
+    // amountDisplay holds the dollar sign and jackpot amount
+    const amountDisplay = document.createElement("div");
     
     const dollarSign = document.createElement("span");
     dollarSign.classList.add("dollar");
@@ -62,9 +76,10 @@ function createJackpotMarkup() {
     const unitDisplay = document.createElement("div");
     unitDisplay.classList.add("illion");
     
-    jackpotContainer.append(dollarSign, jackpot);
+    amountDisplay.append(dollarSign, jackpot);
+    jackpotContainer.append(amountDisplay, unitDisplay);
     
-    container.append(jackpotContainer, unitDisplay);
+    container.append(errorContainer, jackpotContainer);
     
     return container;
 }
@@ -94,6 +109,8 @@ function displayJackpot(id, jackpot) {
     }
     
     document.querySelectorAll(`.lotto-${id}`).forEach(lotto => {
+        lotto.querySelector(".error-container").classList.add("hidden");
+        lotto.querySelector(".jackpot-container").classList.remove("hidden");
         lotto.querySelector(".jackpot").textContent = number;
         lotto.querySelector(".illion").textContent = unit;
     });
