@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     
     update();
-    //setInterval(update, FEED_INTERVAL*1000);
+    setInterval(update, FEED_INTERVAL*1000);
 });
 
 /**
@@ -35,11 +35,24 @@ function update() {
         .then(response => response.json())
         .then(json => {
             LOTTO_IDS.forEach(id => {
-                if (json[id] && json[id].jackpot) {
-                    let jackpot = json[id].jackpot.replace(/,/g, "");
-                    displayJackpot(id, parseInt(jackpot));
+                try {
+                    if (json[id] && json[id].jackpot) {
+                        let jackpot = json[id].jackpot.replace(/,/g, "");
+                        jackpot = parseInt(jackpot);
+                        
+                        if (isNaN(jackpot)) {
+                            throw new Error("Jackpot is not a number");
+                        }
+                        
+                        displayJackpot(id, parseInt(jackpot));
+                    }
+                } catch(e) {
+                    displayError(id);
                 }
             });
+        })
+        .catch(e => {
+            LOTTO_IDS.forEach(id => displayError(id));
         });
 }
 
@@ -113,5 +126,17 @@ function displayJackpot(id, jackpot) {
         lotto.querySelector(".jackpot-container").classList.remove("hidden");
         lotto.querySelector(".jackpot").textContent = number;
         lotto.querySelector(".illion").textContent = unit;
+    });
+}
+
+/**
+Displays the error animation and hides the jackpot for the given lottery.
+
+@param id The lottery identifier.
+*/
+function displayError(id) {
+    document.querySelectorAll(`.lotto-${id}`).forEach(lotto => {
+        lotto.querySelector(".error-container").classList.remove("hidden");
+        lotto.querySelector(".jackpot-container").classList.add("hidden");
     });
 }
