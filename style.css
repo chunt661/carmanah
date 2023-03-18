@@ -25,6 +25,12 @@ main {
 
 .hidden { display: none !important; }
 
+#takeover-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 .side-video {
     position: relative;
 }

@@ -1,6 +1,8 @@
 const FEED_API = "https://challenge.carmanahsigns.com/";
 // How often the feed will be refreshed, in seconds
 const FEED_INTERVAL = 60;
+// How often the takeover video will be displayed, in seconds
+const TAKEOVER_INTERVAL = 30;
 
 /*
 List of lottery identifiers. Used for iterating through the different jackpots
@@ -23,8 +25,15 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
     
+    // Update the feed
     update();
     setInterval(update, FEED_INTERVAL*1000);
+    
+    // Set the takeover video timer
+    setInterval(showTakeoverVideo, TAKEOVER_INTERVAL*1000);
+    
+    const takeoverVideo = document.querySelector("#takeover-video video");
+    takeoverVideo.addEventListener("ended", hideTakeoverVideo);
 });
 
 /**
@@ -138,5 +147,27 @@ function displayError(id) {
     document.querySelectorAll(`.lotto-${id}`).forEach(lotto => {
         lotto.querySelector(".error-container").classList.remove("hidden");
         lotto.querySelector(".jackpot-container").classList.add("hidden");
+    });
+}
+
+function showTakeoverVideo() {
+    const container = document.querySelector("#takeover-video");
+    const video = container.querySelector("video");
+    container.classList.remove("hidden");
+    
+    video.play();
+    
+    // Stop the side videos
+    document.querySelectorAll(".side-video video").forEach(v => v.pause());
+}
+
+function hideTakeoverVideo() {
+    const container = document.querySelector("#takeover-video");
+    container.classList.add("hidden");
+    
+    // Resume the side videos from the beginning
+    document.querySelectorAll(".side-video video").forEach(v => {
+        v.currentTime = 0;
+        v.play();
     });
 }
