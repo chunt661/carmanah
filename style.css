@@ -1,3 +1,14 @@
+:root {
+    --popup-duration: .4s;
+    --stagger: .1s;
+    
+    /* Accurate brand colours! Wow! */
+    --lottomax-colour: #84bd00;
+    --lotto649-colour: #034ea2;
+    --dailygrand-colour: #fa9d1a;
+    --scratch-colour: #de1f26;
+}
+
 body {
     margin: 0;
     font-family: "Arial", "Helvetica", sans-serif;
@@ -11,6 +22,8 @@ main {
     display: flex;
     justify-content: space-between;
 }
+
+.hidden { display: none !important; }
 
 .side-video {
     position: relative;
@@ -31,8 +44,44 @@ main {
     font-size: 96pt;
 }
 
-.tile {
-    font-size: 64pt;
+.overlay.lotto-lmax {
+    color: var(--lottomax-colour);
+}
+
+.overlay.lotto-l649 {
+    color: var(--lotto649-colour);
+}
+
+.overlay.lotto-lmax .error-container span {
+    background-color: var(--lottomax-colour);
+}
+
+.overlay.lotto-l649 .error-container span {
+    background-color: var(--lotto649-colour);
+}
+
+.tile.lotto-lmax {
+    background-color: var(--lottomax-colour);
+}
+
+.tile.lotto-l649 {
+    background-color: var(--lotto649-colour);
+}
+
+.tile.lotto-dg {
+    background-color: var(--dailygrand-colour);
+}
+
+.tile.lotto-scratch {
+    background-color: var(--scratch-colour);
+}
+
+.tile .error-container span {
+    background-color: white;
+}
+
+.jackpot-container > div {
+    display: flex;
 }
 
 .jackpot {
@@ -43,6 +92,7 @@ main {
 .dollar {
     font-size: .375em;
     line-height: 1.67em;
+    color: inherit;
 }
 
 .illion {
@@ -69,12 +119,64 @@ main {
     width: 560px;
     height: 220px;
     
+    font-size: 64pt;
+    
     color: white;
     background: lightblue;
+    border-radius: 32px;
     
-    border-radius: 8px;
+    animation: var(--popup-duration) appear backwards;
 }
 
-.jackpot-container {
+/*
+Unfortunately, no elegant solution exists for staggered animations in vanilla
+CSS. Since the requirements for this project won't change in the future,
+hardcoding in the delay like this seemed acceptable.
+*/
+.tile:nth-child(2) {
+    animation-delay: var(--stagger);
+}
+
+.tile:nth-child(3) {
+    animation-delay: calc(var(--stagger)*1.5);
+}
+
+.tile:nth-child(4) {
+    animation-delay: calc(var(--stagger)*2);
+}
+
+.error-container {
     display: flex;
+    justify-content: center;
+    grid-gap: .15em;
+}
+
+.error-container span {
+    display: inline-block;
+    border-radius: 50%;
+    width: .3em;
+    height: .3em;
+    
+    animation: 1s strobe backwards infinite ease;
+}
+
+.error-container span:nth-child(2) {
+    animation-delay: .3s;
+}
+
+.error-container span:nth-child(3) {
+    animation-delay: .6s;
+}
+
+@keyframes appear {
+    0% {transform: scale(0);}
+    75% {transform: scale(1.15);}
+    100% {transform: scale(1);}
+}
+
+@keyframes strobe {
+    0% {opacity: 15%;}
+    33% {opacity: 85%;}
+    66% {opacity: 15%;}
+    100% {opacity: 15%;}
 }
