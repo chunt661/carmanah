@@ -2,7 +2,7 @@ const FEED_API = "https://challenge.carmanahsigns.com/";
 // How often the feed will be refreshed, in seconds
 const FEED_INTERVAL = 60;
 // How often the takeover video will be displayed, in seconds
-const TAKEOVER_INTERVAL = 30;
+const TAKEOVER_INTERVAL = 10;
 
 /*
 List of lottery identifiers. Used for iterating through the different jackpots
@@ -29,11 +29,11 @@ document.addEventListener("DOMContentLoaded", function() {
     update();
     setInterval(update, FEED_INTERVAL*1000);
     
-    // Set the takeover video timer
-    setInterval(showTakeoverVideo, TAKEOVER_INTERVAL*1000);
-    
+    // Start the takeover video timer
     const takeoverVideo = document.querySelector("#takeover-video video");
     takeoverVideo.addEventListener("ended", hideTakeoverVideo);
+    
+    startTakeoverTimer();
 });
 
 /**
@@ -150,6 +150,20 @@ function displayError(id) {
     });
 }
 
+/**
+Begins the countdown to display the takeover video. A timeout is used rather
+than an interval because an interval does not take into account the length of
+the video - i.e., the interval triggers and the video plays for 5 seconds, but
+the next interval countdown begins immediately. As a result, the subsequent
+length of time between videos would be 25 seconds rather than 30.
+
+Instead, a 30-second timer is set each time the video ends to ensure
+consistency (as much as JavaScript timeouts can allow, at least).
+*/
+function startTakeoverTimer() {
+    setTimeout(showTakeoverVideo, TAKEOVER_INTERVAL*1000);
+}
+
 function showTakeoverVideo() {
     const container = document.querySelector("#takeover-video");
     const video = container.querySelector("video");
@@ -180,4 +194,7 @@ function hideTakeoverVideo() {
     document.querySelectorAll(".tile").forEach(tile => {
         tile.classList.add("tile-animation");
     });
+    
+    // Restart the takeover timer
+    startTakeoverTimer();
 }
