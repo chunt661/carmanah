@@ -9,10 +9,37 @@ const LOTTO_IDS = [
 ];
 
 document.addEventListener("DOMContentLoaded", function() {
-    
+    LOTTO_IDS.forEach(id => {
+        document.querySelectorAll(`.lotto-${id}`).forEach(tag => {
+            tag.appendChild(createJackpotMarkup(id));
+        });
+    });
 });
 
-function updateJackpot(id, jackpot) {
+function createJackpotMarkup(id) {
+    const container = document.createElement("div");
+    
+    const jackpotContainer = document.createElement("div");
+    jackpotContainer.classList.add("jackpot-container");
+    
+    const dollarSign = document.createElement("span");
+    dollarSign.classList.add("dollar");
+    dollarSign.textContent = "$";
+    
+    const jackpot = document.createElement("span");
+    jackpot.classList.add("jackpot");
+    
+    const unitDisplay = document.createElement("div");
+    unitDisplay.classList.add("illion");
+    
+    jackpotContainer.append(dollarSign, jackpot);
+    
+    container.append(jackpotContainer, unitDisplay);
+    
+    return container;
+}
+
+function displayJackpot(id, jackpot) {
     let number = jackpot; // Number to be displayed
     let unit = ""; // The million/billion display
 
