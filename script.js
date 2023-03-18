@@ -22,7 +22,26 @@ document.addEventListener("DOMContentLoaded", function() {
             tag.appendChild(createJackpotMarkup(id));
         });
     });
+    
+    update();
+    //setInterval(update, FEED_INTERVAL*1000);
 });
+
+/**
+Downloads jackpot data from the feed API and updates the display.
+*/
+function update() {
+    fetch(FEED_API)
+        .then(response => response.json())
+        .then(json => {
+            LOTTO_IDS.forEach(id => {
+                if (json[id] && json[id].jackpot) {
+                    let jackpot = json[id].jackpot.replace(/,/g, "");
+                    displayJackpot(id, parseInt(jackpot));
+                }
+            });
+        });
+}
 
 /**
 Creates and returns a DOM element to be used for displaying jackpots.
