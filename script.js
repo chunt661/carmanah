@@ -153,12 +153,17 @@ function displayError(id) {
 function showTakeoverVideo() {
     const container = document.querySelector("#takeover-video");
     const video = container.querySelector("video");
-    container.classList.remove("hidden");
     
+    container.classList.remove("hidden");
     video.play();
     
     // Stop the side videos
     document.querySelectorAll(".side-video video").forEach(v => v.pause());
+    
+    // Remove animation from feed tiles
+    document.querySelectorAll(".tile").forEach(tile => {
+        tile.classList.remove("tile-animation");
+    });
 }
 
 function hideTakeoverVideo() {
@@ -169,5 +174,10 @@ function hideTakeoverVideo() {
     document.querySelectorAll(".side-video video").forEach(v => {
         v.currentTime = 0;
         v.play();
+    });
+    
+    // Show the feed tile animation
+    document.querySelectorAll(".tile").forEach(tile => {
+        tile.classList.add("tile-animation");
     });
 }

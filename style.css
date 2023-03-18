@@ -130,7 +130,9 @@ main {
     color: white;
     background: lightblue;
     border-radius: 32px;
-    
+}
+
+.tile-animation {
     animation: var(--popup-duration) appear backwards;
 }
 
