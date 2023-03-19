@@ -86,10 +86,11 @@ function createTakeoverAnimation(duration, numCircles, reversed, callback) {
 
         overlay.appendChild(circle);
         
-        // Clear animation elements when final animation ends
+        // Add listener for the end of the final animation
         if (i == numCircles-1) {
             circle.addEventListener("animationend", () => {
-                overlay.innerHTML = "";
+                overlay.innerHTML = ""; // Clear animation elements
+                
                 if (callback) {
                     callback();
                 }
