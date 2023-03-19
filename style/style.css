@@ -1,0 +1,28 @@
+:root {
+    --popup-duration: .4s;
+    --stagger: .1s;
+    
+    /* Accurate brand colours! Wow! */
+    --lottomax-colour: #84bd00;
+    --lotto649-colour: #034ea2;
+    --dailygrand-colour: #fa9d1a;
+    --scratch-colour: #de1f26;
+}
+
+body {
+    margin: 0;
+    font-family: "Arial", "Helvetica", sans-serif;
+    
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+}
+
+main {
+    display: flex;
+    justify-content: space-between;
+}
+
+.hidden {
+    display: none !important;
+}

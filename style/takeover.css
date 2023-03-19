@@ -1,0 +1,60 @@
+#takeover-video video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 200;
+}
+
+#takeover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+}
+
+.circle-transition {
+    position: absolute;
+    top: -420px;
+    left: 0;
+    
+    width: 1920px;
+    height: 1920px;
+    border-radius: 50%;
+    background: #233342;
+    opacity: 0%;
+    
+    animation: 1s takeover-circle backwards;
+}
+
+.takeover-video-animation {
+    animation: 1s takeover-video;
+}
+
+@keyframes takeover-video {
+    0% {
+        opacity: 0%;
+    }
+    50% {
+        opacity: 0%;
+    }
+    100% {
+        opacity: 100%;
+    }
+}
+
+@keyframes takeover-circle {
+    0% {
+        transform: scale(0);
+        opacity: 100%;
+        background: #233342;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 100%;
+        background: #0c1423;
+    }
+}
