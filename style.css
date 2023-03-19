@@ -1,3 +1,7 @@
+.side-video:last-of-type {
+    display: hidden;
+}
+
 :root {
     --popup-duration: .4s;
     --stagger: .1s;

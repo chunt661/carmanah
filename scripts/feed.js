@@ -2,6 +2,9 @@ const FEED_API = "https://challenge.carmanahsigns.com/";
 // How often the feed will be refreshed, in seconds
 const FEED_INTERVAL = 60;
 
+// How long to wait before displaying the side video overlay, in seconds
+const OVERLAY_DELAY = 2;
+
 /*
 List of lottery identifiers. Used for iterating through the different jackpots
 and ensuring that each is updated every cycle. This must be maintained on the
@@ -21,6 +24,32 @@ document.addEventListener("DOMContentLoaded", function() {
         document.querySelectorAll(`.lotto-${id}`).forEach(tag => {
             tag.appendChild(createJackpotMarkup(id));
         });
+    });
+    
+    /*
+    In order to synchronize both side videos, the first is selected as the
+    "controller" and the second is selected as the "worker". An event listener
+    is attached to the first video so at each time step the time on the second
+    video is updated to match the first.
+    */
+    const videoController = document.querySelector(".side-video video");
+    const videoWorker = document.querySelector(".side-video:last-of-type video");
+    const sideVideoOverlays = document.querySelectorAll(".side-video .overlay");
+    
+    videoController.addEventListener("timeupdate", (e) => {
+        // Quick and dirty way to synchronize the two videos
+        let time = e.target.currentTime;
+        
+        if (Math.abs(videoWorker.currentTime - time) > .1) {
+            videoWorker.currentTime = time;
+        }
+        
+        // Display the jackpot overlays if appropriate
+        if (time >= OVERLAY_DELAY) {
+            sideVideoOverlays.forEach(o => o.classList.remove("hidden"));
+        } else {
+            sideVideoOverlays.forEach(o => o.classList.add("hidden"));
+        }
     });
     
     // Update the feed
