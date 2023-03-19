@@ -2,7 +2,8 @@
 <html>
     <head>
         <link rel="stylesheet" href="style.css" />
-        <script src="script.js"></script>
+        <script src="scripts/feed.js"></script>
+        <script src="scripts/takeover.js"></script>
     </head>
     <body>
         <main>
@@ -13,10 +14,10 @@
                 <div class="overlay lotto-lmax"></div>
             </div>
             <ul class="feed">
-                <li class="tile lotto-lmax"></li>
-                <li class="tile lotto-l649"></li>
-                <li class="tile lotto-dg"></li>
-                <li class="tile lotto-scratch"></li>
+                <li class="tile tile-animation lotto-lmax"></li>
+                <li class="tile tile-animation lotto-l649"></li>
+                <li class="tile tile-animation lotto-dg"></li>
+                <li class="tile tile-animation lotto-scratch"></li>
             </ul>
             <div class="side-video">
                 <video height="1080" autoplay muted loop>
@@ -25,5 +26,11 @@
                 <div class="overlay lotto-l649"></div>
             </div>
         </main>
+        <div id="takeover-video" class="hidden">
+            <video width="1920" height="1080" muted>
+                <source src="resources/takeover-5s.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div id="takeover-overlay"></div>
     </body>
 </html>

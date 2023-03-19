@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
     
+    // Update the feed
     update();
     setInterval(update, FEED_INTERVAL*1000);
 });
