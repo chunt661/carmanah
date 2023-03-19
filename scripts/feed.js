@@ -46,9 +46,15 @@ document.addEventListener("DOMContentLoaded", function() {
         
         // Display the jackpot overlays if appropriate
         if (time >= OVERLAY_DELAY) {
-            sideVideoOverlays.forEach(o => o.classList.remove("hidden"));
+            sideVideoOverlays.forEach(o => {
+                o.classList.remove("hidden");
+                o.classList.add("overlay-animation");
+            });
         } else {
-            sideVideoOverlays.forEach(o => o.classList.add("hidden"));
+            sideVideoOverlays.forEach(o => {
+                o.classList.add("hidden")
+                o.classList.remove("overlay-animation");
+            });
         }
     });
     

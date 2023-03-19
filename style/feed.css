@@ -59,6 +59,13 @@ Side videos
     justify-content: center;
     align-items: center;
     
+    /* Quick and dirty text outline */
+    text-shadow:
+        -2px -2px 0 white,
+        2px -2px 0 white,
+        -2px 2px 0 white,
+        2px 2px 0 white;
+    
     font-size: 96pt;
 }
 
@@ -78,6 +85,10 @@ Side videos
 /* Colours the circles within the error ellipsis */
 .overlay.lotto-l649 .error-container span {
     background-color: var(--lotto649-colour);
+}
+
+.overlay-animation {
+    animation: var(--fadein-duration) appear-lite backwards ease;
 }
 
 
@@ -151,6 +162,17 @@ Animations
     33% {opacity: 85%;}
     66% {opacity: 15%;}
     100% {opacity: 15%;}
+}
+
+@keyframes appear-lite {
+    from {
+        transform: scale(.75);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 /*

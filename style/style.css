@@ -1,5 +1,6 @@
 :root {
     --popup-duration: .4s;
+    --fadein-duration: 1s;
     --stagger: .1s;
     
     /* Accurate brand colours! Wow! */
@@ -21,6 +22,10 @@ body {
 main {
     display: flex;
     justify-content: space-between;
+}
+
+ul {
+    margin: 0;
 }
 
 .hidden {
